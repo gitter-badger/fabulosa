@@ -107,13 +107,10 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
         R.a [ClassName "off-canvas-overlay"; Href "#close"] []
         R.div [ClassName "off-canvas-content app-page"] [
             R.div [ClassName "docs-content"] [
-                Navbar.header [] [
-                    Navbar.section [] []
-                    Navbar.section [] [
-                        Button.anchor
-                            [Button.Kind Button.Primary] 
-                            [Href "https://github.com/tmonte/fabulosa.git"; Target "_blank"]
-                            [R.str "GitHub"]
+                Navbar.Header.ƒ Navbar.defaults [
+                    Navbar.Section.ƒ Navbar.defaults []
+                    Navbar.Section.ƒ Navbar.defaults [
+                        Anchor.ƒ Anchor.defaults [R.str "hello"]
                     ]
                 ]
                 pageHtml model.currentPage

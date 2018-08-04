@@ -6,11 +6,33 @@ module Checkbox =
     module R = Fable.Helpers.React
     open R.Props
 
-    let input htmlProps label =
-        let inputProps: IHTMLProp list = [Type "checkbox"]
-        let props = htmlProps @ inputProps
-        R.label [ClassName "form-checkbox"] [
-            R.input props
+    [<RequireQualifiedAccess>]
+    type Alignment =
+    | Inline
+    | Unset
+
+    type Props = {
+        Alignment: Alignment
+        HTMLProps: IHTMLProp list
+    }
+   
+    let alignment =
+        function
+        | Alignment.Inline -> "form-inline"
+        | Alignment.Unset -> ""
+
+    let defaults = {
+        Alignment = Alignment.Unset
+        HTMLProps = []
+    }
+
+    let ƒ props label =
+        let containerClasses = ["form-checkbox";
+            alignment props.Alignment ] |> String.concat " "
+        R.label [ClassName containerClasses] [
+            R.input props.HTMLProps
             R.i [ClassName "form-icon"] []
             R.str label
         ]
+
+    let checkbox = ƒ

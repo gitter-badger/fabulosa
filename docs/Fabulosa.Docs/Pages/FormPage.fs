@@ -3,48 +3,61 @@ module FormPage
 module R = Fable.Helpers.React
 open R.Props
 open Fabulosa
-open Fabulosa
 
 let view () =
     Fable.Helpers.React.div [] [
         R.h2 [] [R.str "Forms"]
         R.p [] [R.str "Forms provide the most common control styles used in forms, including input, textarea, select, checkbox, radio and switch."]
-        Grid.grid [] [
-            Grid.row [] [] [
-                Grid.column [Grid.Column.Size 4] [] [
+        Grid.ƒ Grid.defaults [
+            Grid.Row.ƒ Grid.Row.defaults [
+                Grid.Column.ƒ { Grid.Column.defaults with Size = 4 } [
                     Fable.Helpers.React.form [] [
                         Form.group [] [
-                            Label.label [] [Fable.Helpers.React.str "Name"]
-                            Input.input [] [Placeholder "Please enter your name"]
+                            Label.ƒ Label.defaults "Name"
+                            Input.ƒ
+                                { Input.defaults with
+                                    HTMLProps = [Placeholder "Please enter your name"] }
                         ]
                         Form.group [] [
-                            Label.label [] [Fable.Helpers.React.str "Phone"]
-                            Input.input [] [Placeholder "Please enter your phone number"; Type "tel"]
+                            Label.ƒ Label.defaults "Phone"
+                            Input.ƒ
+                                { Input.defaults with
+                                    HTMLProps = [Placeholder "Please enter your phone number";
+                                        Type "tel"] }
                         ]
                         Form.group [] [
-                            Label.label [] [Fable.Helpers.React.str "Something"]
-                            IconInput.iconInput [IconInput.Position IconInput.Left] [] [
-                                Input.input [] [Placeholder "Please enter something"]
-                                Icon.i [Icon.Type Icon.Time] [] []
+                            Label.ƒ Label.defaults "Time"
+                            IconInput.iconInput [] [] [
+                                Input.ƒ
+                                    { Input.defaults with
+                                        HTMLProps = [Placeholder "Please enter something"] }
+                                Icon.ƒ { Icon.defaults with Kind = Icon.Kind.Time } []
                             ]
                         ]
                         Form.group [] [
-                            Label.label [] [R.str "Profile description"]
+                            Label.ƒ Label.defaults "Profile description"
                             Textarea.textarea [Placeholder "Please enter a description"] []
                         ]
                         Form.group [] [
-                            Label.label [] [R.str "Contact preferences"]
-                            Radio.input [Name "contact-prefs"] "Call me"
-                            Radio.input [Name "contact-prefs"] "Text me"
+                            Label.ƒ Label.defaults "Contact preferences"
+                            Radio.ƒ
+                                { Radio.defaults with
+                                    HTMLProps = [Name "contact-prefs"] }
+                                "Call me"
+                            Radio.ƒ
+                                { Radio.defaults with
+                                    HTMLProps = [Name "contact-prefs"] }
+                                "Text me"
                         ]
                         Form.group [] [
-                            Label.label [] [R.str "Profile preferences"]
+                            Label.ƒ Label.defaults "Profile preferences"
                             Switch.input [] "Link my github account"
                         ]
                         Form.group [] [
-                            Checkbox.input [] "Remember me"
+                            Checkbox.ƒ Checkbox.defaults "Remember me"
+                            Checkbox.ƒ Checkbox.defaults "Forget me"
                         ]
-                        Button.anchor [Button.Kind Button.Primary] [Style [MarginTop 10]] [R.str "Submit"]
+                        Anchor.ƒ Anchor.defaults [R.str "Submit"]
                     ]
                 ]
             ]

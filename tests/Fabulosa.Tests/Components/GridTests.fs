@@ -12,37 +12,19 @@ let tests =
 
         test "Grid should be a react html node" {
             let node = R.Node ("div", [ClassName "container"], [])
-            let subject = Grid.grid [] []
+            let subject = Grid.ƒ Grid.defaults []
             compareNode subject node
-        }
-
-        test "Columns props should map to classes" {
-            let columnsProps = [
-                Grid.Row.Kind Grid.Row.Gapless
-            ]
-            let subject = List.map Grid.Row.propToClass columnsProps
-            Expect.contains subject "col-gapless" "Should contain columns gapless class"
         }
 
         test "Columns should be a react html node" {
             let node = R.Node ("div", [ClassName "columns"], [])
-            let subject = Grid.row [] [] []
+            let subject = Grid.Row.ƒ Grid.Row.defaults []
             compareNode subject node
         }
 
-        test "Column props should map to classes" {
-            let columnProps = [
-                Grid.Column.Kind Grid.Column.MLAuto;
-                Grid.Column.Size 3;
-                Grid.Column.MediumSize 5
-            ]
-            let subject = List.map Grid.Column.propToClass columnProps
-            Expect.containsAll subject ["col-ml-auto"; "col-3"; "col-md-5"] "Should contain column classes"
-        }
-
         test "Column should be a react html node" {
-            let node = R.Node ("div", [ClassName "column"], [])
-            let subject = Grid.column [] [] []
+            let node = R.Node ("div", [ClassName "column col-12 col-xs-0 col-sm-0 col-md-0 col-lg-0 col-lg-0"], [])
+            let subject = Grid.Column.ƒ Grid.Column.defaults []
             compareNode subject node
         }
 

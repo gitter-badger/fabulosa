@@ -8,8 +8,22 @@ open Fabulosa.Index
 
 let view () =
     R.div [ClassName "buttons"] [
-        Fi Button.defaults [R.str "Fi Button"]
-
+        
+        
+        ƒ button [R.str "Fi Button"]
+        
+        
+        ƒ button [R.str "yolo"]
+        
+        ƒ pacoquinha [R.str "pacoquinha is a component"]
+        
+        ƒ { button with 
+                Kind = Button.Kind.Link
+                HTMLProps = [OnClick (fun e -> e |> console.log)] 
+          } [R.str "My name is Jones."]
+          
+        
+        
         R.h2 [] [R.str "Buttons"]
         R.p [] [R.str "Buttons include simple button styles for actions in different types and sizes."]
         R.div [] [

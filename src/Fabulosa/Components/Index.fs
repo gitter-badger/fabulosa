@@ -6,11 +6,16 @@ module Index =
     module R = Fable.Helpers.React
 
 
-    let Fi (props : obj) c : ReactElement = 
+    let Fi (props : obj) c = 
          match props with 
-         | :? Button.Props as p -> R.div [] c
+         | :? Button.Props as p -> Button.ƒ p c
          | :? Pacoquinha.Props as p -> R.span [] c
-         | _ -> R.span [] []
+         | _ -> R.span [] c
          
+    let ƒ = Fi
+    
+    let button = Button.defaults
+    
+    let pacoquinha = Pacoquinha.defaults
          
     let ø = R.div [] [R.str "hey yo"] 

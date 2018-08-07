@@ -18,45 +18,37 @@ let view () =
                             Input.ƒ
                                 { Input.defaults with HTMLProps = [Placeholder "Please enter your name"] }
                         ]
-                        
-                        //FI STYLE PROGRAMMING
                         Form.group [] [
                             Label.ƒ Label.defaults "Phone"
                             
-                            ƒ { input with 
+                            Input.ƒ { input with 
                                     HTMLProps = [
                                         Placeholder "Please enter your phone number"; Type "tel"] 
                             }
                             
                         ]
-                        
-                        
-                        //ICON THAT IS MODIFIED IN ICONINPUT 
                         Form.group [] [
                             Label.ƒ Label.defaults "Time"
-                            ƒ { 
+                            IconInput.ƒ { 
                                 iconInput { input with HTMLProps = [Placeholder "Please enter something"] } with 
                                 IconLeft = Some { icon [] with Kind = Icon.Kind.Time }
                             }
                         ]
-                        
-                        
-                        
                         Form.group [] [
                             Label.ƒ Label.defaults "Profile description"
                             Textarea.textarea [Placeholder "Please enter a description"] []
                         ]
-//                        Form.group [] [
-//                            Label.ƒ Label.defaults "Contact preferences"
-//                            Radio.ƒ
-//                                { Radio.defaults with
-//                                    HTMLProps = [Name "contact-prefs"] }
-//                                "Call me"
-//                            Radio.ƒ
-//                                { Radio.defaults with
-//                                    HTMLProps = [Name "contact-prefs"] }
-//                                "Text me"
-//                        ]
+                        Form.group [] [
+                            Label.ƒ Label.defaults "Contact preferences"
+                            Radio.ƒ
+                                { Radio.defaults with
+                                    HTMLProps = [Name "contact-prefs"] }
+                                "Call me"
+                            Radio.ƒ
+                                { Radio.defaults with
+                                    HTMLProps = [Name "contact-prefs"] }
+                                "Text me"
+                        ]
                         Form.group [] [
                             Label.ƒ Label.defaults "Profile preferences"
                             Switch.input [] "Link my github account"

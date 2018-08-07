@@ -6,6 +6,7 @@ module Icon =
     open ClassNames
     module R = Fable.Helpers.React
     open R.Props
+    open Fable.Import.React
 
     [<RequireQualifiedAccess>]
     type Kind =
@@ -58,12 +59,14 @@ module Icon =
     | Unset
 
     type Props = {
+        Children : ReactElement list
         Kind: Kind
         Size: Size
         HTMLProps: IHTMLProp list
     }
 
-    let defaults = {
+    let defaults children = {
+        Children = children
         Kind = Kind.Unset
         Size = Size.Unset
         HTMLProps = []
@@ -120,8 +123,10 @@ module Icon =
         | Size.Unset -> ""
 
     let ƒ props =
-        props.HTMLProps
-        |> combineProps ["icon";
-            kind props.Kind;
-            size props.Size]
-        |> R.i
+        let p =
+            props.HTMLProps
+            |> combineProps ["icon";
+                kind props.Kind;
+                size props.Size]
+                
+        R.i p props.Children

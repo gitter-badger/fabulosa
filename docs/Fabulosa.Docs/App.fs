@@ -74,7 +74,7 @@ let menu currentPage =
 let urlUpdate (result: Option<Page>) model =
     match result with
     | None ->
-        console.error("Error parsing url")
+        console.error("Error parsing url", result)
         model, Navigation.modifyUrl (toHash model.currentPage)
     | Some page ->
         { model with currentPage = page }, []
@@ -110,7 +110,7 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
                 Navbar.Header.ƒ Navbar.defaults [
                     Navbar.Section.ƒ Navbar.defaults []
                     Navbar.Section.ƒ Navbar.defaults [
-                        Anchor.ƒ Anchor.defaults [R.str "hello"]
+                        Anchor.ƒ ([R.str "hello"] |> Anchor.defaults)
                     ]
                 ]
                 pageHtml model.currentPage

@@ -6,6 +6,7 @@ module Input =
     open ClassNames
     module R = Fable.Helpers.React
     open R.Props
+    open Fable.Import.React
 
     [<RequireQualifiedAccess>]
     type Size =
@@ -13,14 +14,14 @@ module Input =
     | Large
     | Unset
 
-    type Prop = {
-        Size: Size
+    type Props = {
         HTMLProps: IHTMLProp list
+        Size: Size
     }
 
     let defaults = {
-        Size = Size.Unset
         HTMLProps = []
+        Size = Size.Unset
     }
 
     let size =
@@ -30,10 +31,11 @@ module Input =
         | Size.Unset -> ""
 
     let ƒ props =
-        props.HTMLProps
-        |> combineProps ["form-input";
-            size props.Size]
-        |> R.input
+        let containerProps =
+            props.HTMLProps
+            |> combineProps ["form-input";
+                size props.Size]
+        R.input containerProps
 
     let input = ƒ
 
@@ -44,6 +46,7 @@ module IconInput =
     open ReactAPIExtensions
     open Fable.Import.React
     module R = Fable.Helpers.React
+    open R.Props
 
     [<RequireQualifiedAccess>]
     type Position =
@@ -51,10 +54,14 @@ module IconInput =
     | Right
 
     type Props = {
+        IconLeft: Icon.Props option
+        Input: Input.Props
         Position: Position
     }
 
-    let defaults = {
+    let defaults input = {
+        IconLeft = None
+        Input = input
         Position = Position.Left
     }
 
@@ -77,3 +84,26 @@ module IconInput =
             children.[0]
             children.[1]
         ]
+   
+    let iconLeftClass = 
+        function
+        | Some s -> "has-icon-left"
+        | None -> ""
+    
+    let iconLeft =
+        function 
+        | Some e -> Icon.ƒ { e with HTMLProps = [ClassName "form-icon"]}
+        | None -> null
+    
+    let ƒ (props : Props) = 
+        
+        R.div [ClassName (iconLeftClass props.IconLeft)] [
+            Input.ƒ props.Input
+            (iconLeft props.IconLeft)
+        ]
+        
+//<div class="has-icon-left">
+//  <input type="text" class="form-input" placeholder="...">
+//  <i class="form-icon icon icon-check"></i>
+//</div>
+

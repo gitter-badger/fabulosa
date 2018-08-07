@@ -4,7 +4,10 @@ namespace Fabulosa
 module Button =
 
     open ClassNames
+    open Fable.Import.React
     module R = Fable.Helpers.React
+    open Fable.PowerPack.Keyboard
+    open Fable.PowerPack.Keyboard
     open R.Props
 
     [<RequireQualifiedAccess>]
@@ -46,6 +49,7 @@ module Button =
         Size: Size
         State: State
         Format: Format
+        Children: ReactElement list
         HTMLProps: IHTMLProp list
     }
 
@@ -81,14 +85,17 @@ module Button =
         | Format.RoundAction -> "btn-action circle"
         | Format.Unset -> ""
 
-    let defaults = {
+    let button children = {
         Props.Kind = Kind.Unset
         Props.Color = Color.Unset
         Props.Size = Size.Unset
         Props.State = State.Unset
         Props.Format = Format.Unset
+        Props.Children = children
         Props.HTMLProps = []
     }
+    
+//    let buttonText text = button [R.str text]
 
     let ƒ (props: Props) =
         let buttonProps = [ "btn";
@@ -98,9 +105,11 @@ module Button =
             state props.State;
             format props.Format ]
         combineProps buttonProps props.HTMLProps
-        |> R.button
+        R.button
+            (combineProps buttonProps props.HTMLProps)
+            props.Children
     
-    let button = ƒ
+    let render = ƒ
 
 [<RequireQualifiedAccess>]
 module Pacoquinha =
@@ -128,6 +137,7 @@ module Anchor =
 
     open ClassNames
     module R = Fable.Helpers.React
+    open Fable.Import.React
     open R.Props
 
     type Props = {
@@ -135,16 +145,19 @@ module Anchor =
         HTMLProps: IHTMLProp list
     }
 
-    let defaults = Button.defaults
+    let defaults = Button.button
 
-    let ƒ (props: Button.Props) =
-        props.HTMLProps
-        |> combineProps [ "btn";
-            Button.kind props.Kind;
-            Button.color props.Color;
-            Button.size props.Size;
-            Button.state props.State;
-            Button.format props.Format ]
-        |> R.a
+    let ƒ (props: Button.Props) : ReactElement = 
+        let combinedProps =  
+            combineProps [
+                "btn";
+                Button.kind props.Kind;
+                Button.color props.Color;
+                Button.size props.Size;
+                Button.state props.State;
+                Button.format props.Format 
+            ]    
+            props.HTMLProps
+        R.a combinedProps props.Children
     
     let anchor = ƒ

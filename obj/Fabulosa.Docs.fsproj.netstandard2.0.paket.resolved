@@ -1,0 +1,6 @@
+FSharp.Compiler.Service,2.0.0.6,Transitive,Main,false
+FSharp.Core,4.5.2,Transitive,Main,false
+Fable.Core,2.0.0-beta-001,Direct,Main,false
+Fable.Import.Browser,1.2.0-beta-001,Direct,Main,false
+FSharpVSPowerTools.Core,2.3,Transitive,Main,false
+FSharp.Formatting,2.14.4,Direct,Main,false
